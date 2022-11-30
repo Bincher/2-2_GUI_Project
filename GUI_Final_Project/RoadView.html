@@ -20,11 +20,14 @@
         var rvClient = new kakao.maps.RoadviewClient();
 
         function setRv(lat, lng) {
+
             var position = new kakao.maps.LatLng(lat, lng);
             rvClient.getNearestPanoId(position, 500, function (panoId) {
                 rv.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
             });
         }
+
+        
     </script>
 </body>
 </html>
