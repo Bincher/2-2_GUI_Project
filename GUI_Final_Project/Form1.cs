@@ -10,20 +10,31 @@ using System.Windows.Forms;
 using System.Web.Script.Serialization;
 using System.Net;
 using System.IO;
+using CefSharp;
+using CefSharp.WinForms;
+using System.Runtime.ConstrainedExecution;
+using System.Threading;
 
 namespace GUI_Final_Project
 {
     public partial class Form1 : Form
     {
+        public ChromiumWebBrowser Broswer;
+
         List<Tuple<string, double, double>>tuples = new List<Tuple<string, double, double>>();
         public Form1()
         {
             InitializeComponent();
+            InitBrowser();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        public void InitBrowser()
         {
-
+            CefSettings cefSettings = new CefSettings();
+            Cef.Initialize(cefSettings);
+            Broswer = new ChromiumWebBrowser("google.com");
+            this.webBrowser1.Controls.Add(Broswer);
+            Broswer.Dock = DockStyle.Fill;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -39,7 +50,7 @@ namespace GUI_Final_Project
         public void Search(string area) // 지역 검색
         {
             // 요청을 보낼 url 
-            string site = "https://dapi.kakao.com/v2/local/search/address.json";
+            string site = "https://dapi.kakao.com/v2/local/search/keyword.json";
             string query = string.Format("{0}?query={1}", site, area);
 
             WebRequest request = WebRequest.Create(query); // 요청 생성. 
@@ -60,13 +71,12 @@ namespace GUI_Final_Project
 
             for (int i = 0; i < length; i++) // 지역명, 위도, 경도 읽어오기. 
             {
-                string address_name = docs[i]["address_name"];
+                string address_name = docs[i]["place_name"];
                 double x = double.Parse(docs[i]["x"]); // 위도
                 double y = double.Parse(docs[i]["y"]); // 경도
                 tuples.Add(new Tuple<string, double, double>(address_name, x, y));
             }
         }
-
        
 
         private void input(string str)
@@ -86,22 +96,16 @@ namespace GUI_Final_Project
         {
             var sel = tuples[listBox1.SelectedIndex];
             object[] arr = new object[] { sel.Item3, sel.Item2 }; // 위도, 경도
-            object res = webBrowser1.Document.InvokeScript("panTo", arr); // html 의 panTo 자바스크립트 함수 호출. 
+            object res = webBrowser1.Document.InvokeScript("panTo", arr); // html 의 panTo 자바스크립트 함수 호출.
+            object res2 = webBrowser1.Document.InvokeScript("markTo", arr);                                             //
         }
+
         private void search_textbox_KeyDown(object sender, KeyEventArgs e)
         {
-            /*
             switch (e.KeyCode)
             {
                 case Keys.Enter:
                     input(search_textbox.Text);
-                    break;
-            }
-            */
-            switch (e.KeyCode)
-            {
-                case Keys.Enter:
-                    input(key_textbox.Text);
                     break;
             }
         }
@@ -127,7 +131,10 @@ namespace GUI_Final_Project
         private void listBox1_MouseClick(object sender, MouseEventArgs e)
         {
             if (listBox1.SelectedIndex >= 0)
+            {
                 ShowMap();
+            }
+                
         }
 
         private void large_button_Click(object sender, EventArgs e)
@@ -140,27 +147,90 @@ namespace GUI_Final_Project
             webBrowser1.Document.InvokeScript("zoomOut"); // 줌아웃
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void key_textbox_KeyDown(object sender, KeyEventArgs e)
-        {
-            switch (e.KeyCode)
-            {
-                case Keys.Enter:
-                    input(key_textbox.Text);
-                    break;
-            }
-        }
+     
 
         private void button1_Click(object sender, EventArgs e)
         {
             if (listBox1.SelectedIndex >= 0)
-                ShowMap();
+            {
+                ShowMap();      
+            }
+                
         }
 
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            
+        }
 
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+
+        }
     }
 }
+
+/*
+ * HTTP/1.1 200 OK
+
+Content-Type: application/json;charset=UTF-8
+
+{
+
+  "meta": {
+
+    "same_name": {
+
+      "region": [],
+
+      "keyword": "카카오프렌즈",
+
+      "selected_region": ""
+
+    },
+
+    "pageable_count": 14,
+
+    "total_count": 14,
+
+    "is_end": true
+
+  },
+
+  "documents": [
+
+    {
+
+      "place_name": "카카오프렌즈 코엑스점",
+
+      "distance": "418",
+
+      "place_url": "http://place.map.daum.net/26338954",
+
+      "category_name": "가정,생활 > 문구,사무용품 > 디자인문구 > 카카오프렌즈",
+
+      "address_name": "서울 강남구 삼성동 159",
+
+      "road_address_name": "서울 강남구 영동대로 513",
+
+      "id": "26338954",
+
+      "phone": "02-6002-1880",
+
+      "category_group_code": "",
+
+      "category_group_name": "",
+
+      "x": "127.05902969025047",
+
+      "y": "37.51207412593136"
+
+    },
+
+    ...
+
+  ]
+
+}
+ */
