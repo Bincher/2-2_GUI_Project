@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<style type="text/css">
+    html, body {
+        width: 99%;
+        height: 98%;
+    }
+</style>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>지도 생성하기</title>
+</head>
+<body>
+    <div id="roadview" style="width:100%;height:100%;"></div>
+    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=10cb5f9d5d0bcc8512ec8426e35a04cd&libraries=services"></script>
+    <script>
+        var rvContainer = document.getElementById('roadview'); //로드뷰를 표시할 div
+        var rv = new kakao.maps.Roadview(rvContainer); //로드뷰 객체
+        var rvClient = new kakao.maps.RoadviewClient();
+
+        function setRv(lat, lng) {
+            var position = new kakao.maps.LatLng(lat, lng);
+            rvClient.getNearestPanoId(position, 500, function (panoId) {
+                rv.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
+            });
+        }
+    </script>
+</body>
+</html>

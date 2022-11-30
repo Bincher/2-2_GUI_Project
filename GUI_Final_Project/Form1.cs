@@ -14,27 +14,19 @@ using CefSharp;
 using CefSharp.WinForms;
 using System.Runtime.ConstrainedExecution;
 using System.Threading;
+using System.Security;
+using Microsoft.Win32;
+using System;
+using System.Diagnostics;
 
 namespace GUI_Final_Project
 {
     public partial class Form1 : Form
     {
-        public ChromiumWebBrowser Broswer;
-
         List<Tuple<string, double, double>>tuples = new List<Tuple<string, double, double>>();
         public Form1()
         {
             InitializeComponent();
-            InitBrowser();
-        }
-
-        public void InitBrowser()
-        {
-            CefSettings cefSettings = new CefSettings();
-            Cef.Initialize(cefSettings);
-            Broswer = new ChromiumWebBrowser("google.com");
-            this.webBrowser1.Controls.Add(Broswer);
-            Broswer.Dock = DockStyle.Fill;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -46,6 +38,15 @@ namespace GUI_Final_Project
             string dir = System.IO.Directory.GetCurrentDirectory();
             string path = System.IO.Path.Combine(dir, html);
             webBrowser1.Navigate(path);
+
+            Version ver2 = webBrowser2.Version;
+            string name2 = webBrowser2.ProductName;
+            string str2 = webBrowser2.ProductVersion;
+            string html2 = "C:\\Users\\seongbin\\source\\repos\\GUI_Final_Project\\GUI_Final_Project\\RoadView.html";
+            string dir2 = System.IO.Directory.GetCurrentDirectory();
+            string path2 = System.IO.Path.Combine(dir2, html2);
+            webBrowser2.Navigate(path2);
+
         }
         public void Search(string area) // 지역 검색
         {
@@ -112,15 +113,7 @@ namespace GUI_Final_Project
 
         private void search_button_Click(object sender, EventArgs e)
         {
-            try
-            {
-                object[] arr = new object[] { search_textbox.Text };
-                webBrowser1.Document.InvokeScript("geo", arr); // html 의 geo 자바스크립트 함수 호출. 
-            }
-            catch(Exception ex)
-            {
-                ex.ToString();
-            }
+            input(search_textbox.Text);
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -147,27 +140,19 @@ namespace GUI_Final_Project
             webBrowser1.Document.InvokeScript("zoomOut"); // 줌아웃
         }
 
-
-     
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (listBox1.SelectedIndex >= 0)
-            {
-                ShowMap();      
-            }
-                
-        }
-
         private void button1_Click_1(object sender, EventArgs e)
         {
-            
+            var sel = tuples[listBox1.SelectedIndex];
+            object[] arr = new object[] { sel.Item3, sel.Item2 };
+            webBrowser2.Document.InvokeScript("setRv", arr);
         }
 
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
 
         }
+
+
     }
 }
 

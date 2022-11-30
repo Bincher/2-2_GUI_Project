@@ -30,12 +30,12 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.search_textbox = new System.Windows.Forms.TextBox();
-            this.button_1 = new System.Windows.Forms.Button();
+            this.search_button = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.large_button = new System.Windows.Forms.Button();
             this.small_button = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_Lv = new System.Windows.Forms.Button();
             this.webBrowser2 = new System.Windows.Forms.WebBrowser();
             this.SuspendLayout();
             // 
@@ -44,27 +44,27 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 12);
+            this.label1.Size = new System.Drawing.Size(49, 12);
             this.label1.TabIndex = 0;
-            this.label1.Text = "지역쿼리:";
+            this.label1.Text = "키워드 :";
             // 
             // search_textbox
             // 
-            this.search_textbox.Location = new System.Drawing.Point(76, 9);
+            this.search_textbox.Location = new System.Drawing.Point(67, 9);
             this.search_textbox.Name = "search_textbox";
-            this.search_textbox.Size = new System.Drawing.Size(198, 21);
+            this.search_textbox.Size = new System.Drawing.Size(112, 21);
             this.search_textbox.TabIndex = 1;
             this.search_textbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.search_textbox_KeyDown);
             // 
-            // button_1
+            // search_button
             // 
-            this.button_1.Location = new System.Drawing.Point(280, 9);
-            this.button_1.Name = "button_1";
-            this.button_1.Size = new System.Drawing.Size(101, 23);
-            this.button_1.TabIndex = 2;
-            this.button_1.Text = "검색";
-            this.button_1.UseVisualStyleBackColor = true;
-            this.button_1.Click += new System.EventHandler(this.search_button_Click);
+            this.search_button.Location = new System.Drawing.Point(185, 9);
+            this.search_button.Name = "search_button";
+            this.search_button.Size = new System.Drawing.Size(51, 23);
+            this.search_button.TabIndex = 2;
+            this.search_button.Text = "검색";
+            this.search_button.UseVisualStyleBackColor = true;
+            this.search_button.Click += new System.EventHandler(this.search_button_Click);
             // 
             // listBox1
             // 
@@ -85,7 +85,7 @@
             this.webBrowser1.Location = new System.Drawing.Point(242, 36);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(322, 297);
+            this.webBrowser1.Size = new System.Drawing.Size(522, 430);
             this.webBrowser1.TabIndex = 5;
             this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
             // 
@@ -93,7 +93,7 @@
             // 
             this.large_button.Location = new System.Drawing.Point(14, 406);
             this.large_button.Name = "large_button";
-            this.large_button.Size = new System.Drawing.Size(72, 30);
+            this.large_button.Size = new System.Drawing.Size(72, 60);
             this.large_button.TabIndex = 6;
             this.large_button.Text = "+";
             this.large_button.UseVisualStyleBackColor = true;
@@ -101,44 +101,44 @@
             // 
             // small_button
             // 
-            this.small_button.Location = new System.Drawing.Point(103, 408);
+            this.small_button.Location = new System.Drawing.Point(92, 407);
             this.small_button.Name = "small_button";
-            this.small_button.Size = new System.Drawing.Size(76, 28);
+            this.small_button.Size = new System.Drawing.Size(64, 59);
             this.small_button.TabIndex = 7;
             this.small_button.Text = "-";
             this.small_button.UseVisualStyleBackColor = true;
             this.small_button.Click += new System.EventHandler(this.small_button_Click);
             // 
-            // button1
+            // btn_Lv
             // 
-            this.button1.Location = new System.Drawing.Point(387, 9);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "LoadView";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.btn_Lv.Location = new System.Drawing.Point(162, 408);
+            this.btn_Lv.Name = "btn_Lv";
+            this.btn_Lv.Size = new System.Drawing.Size(74, 58);
+            this.btn_Lv.TabIndex = 8;
+            this.btn_Lv.Text = "LoadView";
+            this.btn_Lv.UseVisualStyleBackColor = true;
+            this.btn_Lv.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // webBrowser2
             // 
-            this.webBrowser2.Location = new System.Drawing.Point(570, 36);
+            this.webBrowser2.Location = new System.Drawing.Point(770, 36);
             this.webBrowser2.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser2.Name = "webBrowser2";
-            this.webBrowser2.Size = new System.Drawing.Size(340, 297);
+            this.webBrowser2.Size = new System.Drawing.Size(585, 430);
             this.webBrowser2.TabIndex = 9;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(945, 446);
+            this.ClientSize = new System.Drawing.Size(1367, 478);
             this.Controls.Add(this.webBrowser2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_Lv);
             this.Controls.Add(this.small_button);
             this.Controls.Add(this.large_button);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.button_1);
+            this.Controls.Add(this.search_button);
             this.Controls.Add(this.search_textbox);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
@@ -153,12 +153,12 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox search_textbox;
-        private System.Windows.Forms.Button button_1;
+        private System.Windows.Forms.Button search_button;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button large_button;
         private System.Windows.Forms.Button small_button;
         private System.Windows.Forms.WebBrowser webBrowser1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_Lv;
         private System.Windows.Forms.WebBrowser webBrowser2;
     }
 }
