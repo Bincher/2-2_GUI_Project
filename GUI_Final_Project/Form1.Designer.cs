@@ -30,12 +30,12 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.search_textbox = new System.Windows.Forms.TextBox();
-            this.button_1 = new System.Windows.Forms.Button();
+            this.search_button = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.large_button = new System.Windows.Forms.Button();
             this.small_button = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_Lv = new System.Windows.Forms.Button();
             this.webBrowser2 = new System.Windows.Forms.WebBrowser();
             this.SuspendLayout();
             // 
@@ -56,15 +56,15 @@
             this.search_textbox.TabIndex = 1;
             this.search_textbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.search_textbox_KeyDown);
             // 
-            // button_1
+            // search_button
             // 
-            this.button_1.Location = new System.Drawing.Point(280, 9);
-            this.button_1.Name = "button_1";
-            this.button_1.Size = new System.Drawing.Size(101, 23);
-            this.button_1.TabIndex = 2;
-            this.button_1.Text = "검색";
-            this.button_1.UseVisualStyleBackColor = true;
-            this.button_1.Click += new System.EventHandler(this.search_button_Click);
+            this.search_button.Location = new System.Drawing.Point(280, 9);
+            this.search_button.Name = "search_button";
+            this.search_button.Size = new System.Drawing.Size(101, 23);
+            this.search_button.TabIndex = 2;
+            this.search_button.Text = "검색";
+            this.search_button.UseVisualStyleBackColor = true;
+            this.search_button.Click += new System.EventHandler(this.search_button_Click);
             // 
             // listBox1
             // 
@@ -109,15 +109,15 @@
             this.small_button.UseVisualStyleBackColor = true;
             this.small_button.Click += new System.EventHandler(this.small_button_Click);
             // 
-            // button1
+            // btn_Lv
             // 
-            this.button1.Location = new System.Drawing.Point(387, 9);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "LoadView";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.btn_Lv.Location = new System.Drawing.Point(387, 9);
+            this.btn_Lv.Name = "btn_Lv";
+            this.btn_Lv.Size = new System.Drawing.Size(75, 23);
+            this.btn_Lv.TabIndex = 8;
+            this.btn_Lv.Text = "LoadView";
+            this.btn_Lv.UseVisualStyleBackColor = true;
+            this.btn_Lv.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // webBrowser2
             // 
@@ -133,12 +133,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(945, 446);
             this.Controls.Add(this.webBrowser2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_Lv);
             this.Controls.Add(this.small_button);
             this.Controls.Add(this.large_button);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.button_1);
+            this.Controls.Add(this.search_button);
             this.Controls.Add(this.search_textbox);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
@@ -153,12 +153,12 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox search_textbox;
-        private System.Windows.Forms.Button button_1;
+        private System.Windows.Forms.Button search_button;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button large_button;
         private System.Windows.Forms.Button small_button;
         private System.Windows.Forms.WebBrowser webBrowser1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_Lv;
         private System.Windows.Forms.WebBrowser webBrowser2;
     }
 }
