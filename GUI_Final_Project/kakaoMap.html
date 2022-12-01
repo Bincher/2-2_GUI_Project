@@ -12,12 +12,13 @@
     <title>지도 생성하기</title>
 </head>
 <body>
-    <div id="map" style="width:100%; height:100%; "></div>
-    <div id="roadview" style="width:100%;height:300px;"></div>
-    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=10cb5f9d5d0bcc8512ec8426e35a04cd&libraries=services"></script>
+    <div id="map" style="width: 50%; height: 100%; float: left; "></div>
+    <div id="roadview" style="width: 50%; height: 100%; float: left;"></div>
+
+    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=10cb5f9d5d0bcc8512ec8426e35a04cd&libraries=services,drawing"></script>
     <script>
         var mapWrapper = document.getElementById('mapWrapper');
-        var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+        var container = document.getElementById('roadview')
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div
             mapCenter = new kakao.maps.LatLng(33.450422139819736, 126.5709139924533), // 지도의 가운데 좌표
             mapOption = {
@@ -32,6 +33,107 @@
         var rv = new kakao.maps.Roadview(rvContainer); //로드뷰 객체
         var rvClient = new kakao.maps.RoadviewClient();
 
+        var strokeColor = '#39f',
+            fillColor = '#cce6ff',
+            fillOpacity = 0.5,
+            hintStrokeStyle = 'dash';
+        
+        var markImage = new kakao.maps.MarkerImage(
+            'https://t1.daumcdn.net/localimg/localimages/07/2018/pc/roadview_minimap_wk_2018.png',
+            new kakao.maps.Size(26, 46),
+            {
+                // 스프라이트 이미지를 사용합니다.
+                // 스프라이트 이미지 전체의 크기를 지정하고
+                spriteSize: new kakao.maps.Size(1666, 168),
+                // 사용하고 싶은 영역의 좌상단 좌표를 입력합니다.
+                // background-position으로 지정하는 값이며 부호는 반대입니다.
+                spriteOrigin: new kakao.maps.Point(705, 114),
+                offset: new kakao.maps.Point(13, 46)
+            }
+        );
+
+        var rvMarker = new kakao.maps.Marker({
+            image: markImage,
+            position: mapCenter,
+            draggable: true,
+            map: map
+        });
+
+        var options = { // Drawing Manager를 생성할 때 사용할 옵션입니다
+            map: map, // Drawing Manager로 그리기 요소를 그릴 map 객체입니다
+            drawingMode: [
+                kakao.maps.Drawing.OverlayType.MARKER,
+                kakao.maps.Drawing.OverlayType.ARROW,
+                kakao.maps.Drawing.OverlayType.POLYLINE,
+                kakao.maps.Drawing.OverlayType.RECTANGLE,
+                kakao.maps.Drawing.OverlayType.CIRCLE,
+                kakao.maps.Drawing.OverlayType.ELLIPSE,
+                kakao.maps.Drawing.OverlayType.POLYGON
+            ],
+            // 사용자에게 제공할 그리기 가이드 툴팁입니다
+            // 사용자에게 도형을 그릴때, 드래그할때, 수정할때 가이드 툴팁을 표시하도록 설정합니다
+            guideTooltip: ['draw', 'drag', 'edit'],
+            markerOptions: {
+                draggable: true,
+                removable: true
+            },
+            arrowOptions: {
+                draggable: true,
+                removable: true,
+                strokeColor: strokeColor,
+                hintStrokeStyle: hintStrokeStyle
+            },
+            polylineOptions: {
+                draggable: true,
+                removable: true,
+                strokeColor: strokeColor,
+                hintStrokeStyle: hintStrokeStyle
+            },
+            rectangleOptions: {
+                draggable: true,
+                removable: true,
+                strokeColor: strokeColor,
+                fillColor: fillColor,
+                fillOpacity: fillOpacity
+            },
+            circleOptions: {
+                draggable: true,
+                removable: true,
+                strokeColor: strokeColor,
+                fillColor: fillColor,
+                fillOpacity: fillOpacity
+            },
+            ellipseOptions: {
+                draggable: true,
+                removable: true,
+                strokeColor: strokeColor,
+                fillColor: fillColor,
+                fillOpacity: fillOpacity
+            },
+            polygonOptions: {
+                draggable: true,
+                removable: true,
+                strokeColor: strokeColor,
+                fillColor: fillColor,
+                fillOpacity: fillOpacity
+            }
+        };
+
+
+        var iwContent = '<div style="padding:5px;">Hello World! <br><a href="https://map.kakao.com/link/map/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+            iwPosition = new kakao.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
+        // 위에 작성한 옵션으로 Drawing Manager를 생성합니다
+        var manager = new kakao.maps.Drawing.DrawingManager(options);
+
+        // Toolbox를 생성합니다. 
+        // Toolbox 생성 시 위에서 생성한 DrawingManager 객체를 설정합니다.
+        // DrawingManager 객체를 꼭 설정해야만 그리기 모드와 매니저의 상태를 툴박스에 설정할 수 있습니다.
+        var toolbox = new kakao.maps.Drawing.Toolbox({ drawingManager: manager });
+
+        // 지도 위에 Toolbox를 표시합니다
+        // kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOP은 위 가운데를 의미합니다.
+        map.addControl(toolbox.getElement(), kakao.maps.ControlPosition.TOP);
+        map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
         toggleRoadview(mapCenter);
 
         function moveTo(lat, lng) {
@@ -71,14 +173,45 @@
             var level = map.getLevel();
             map.setLevel(level + 1);
         }
+        var clickLv;
 
-        function toggleRoadview(lat, lng) {
-            var position = new kakao.maps.LatLng(33.450701, 126.570667);
-            rvClient.getNearestPanoId(position, 500, function (panoId) {
-                rv.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
+        function setLv() {
+            map.addOverlayMapTypeId(kakao.maps.MapTypeId.ROADVIEW); //지도 위에 로드뷰 도로 올리기
+
+            clickLv = kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+
+            // 현재 클릭한 부분의 좌표를 리턴 
+            var position = mouseEvent.latLng;
+
+            rvMarker.setPosition(position);
+            toggleRoadview(position); //로드뷰를 토글합니다
+            });
+        }
+
+        function rmLv() {
+            var rvMarker = new kakao.maps.Marker({
+                image: markImage,
+                position: mapCenter,
+                draggable: true,
+                map: map
+            });
+            // 지도 위의 로드뷰 도로 오버레이를 제거합니다
+            map.removeOverlayMapTypeId(kakao.maps.MapTypeId.ROADVIEW);
+            // 지도 위의 마커를 제거합니다
+            rvMarker.setMap(null);
+            removeEventListener('click', clickLv);
+        }
+
+        function toggleRoadview(position) {
+            //전달받은 좌표(position)에 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄웁니다
+            rvClient.getNearestPanoId(position, 50, function (panoId) {
+                rv.setPanoId(panoId, position); //panoId를 통한 로드뷰 실행
+                rv.relayout(); //로드뷰를 감싸고 있는 영역이 변경됨에 따라, 로드뷰를 재배열합니다
                 
             });
         }
+
+
     </script>
 </body>
 </html>

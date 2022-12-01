@@ -24,6 +24,7 @@ namespace GUI_Final_Project
     public partial class Form1 : Form
     {
         List<Tuple<string, double, double>>tuples = new List<Tuple<string, double, double>>();
+        int lv = 0;
         public Form1()
         {
             InitializeComponent();
@@ -39,15 +40,8 @@ namespace GUI_Final_Project
             string path = System.IO.Path.Combine(dir, html);
             webBrowser1.Navigate(path);
 
-            Version ver2 = webBrowser2.Version;
-            string name2 = webBrowser2.ProductName;
-            string str2 = webBrowser2.ProductVersion;
-            string html2 = "C:\\Users\\seongbin\\source\\repos\\GUI_Final_Project\\GUI_Final_Project\\RoadView.html";
-            string dir2 = System.IO.Directory.GetCurrentDirectory();
-            string path2 = System.IO.Path.Combine(dir2, html2);
-            webBrowser2.Navigate(path2);
-
         }
+
         public void Search(string area) // 지역 검색
         {
             // 요청을 보낼 url 
@@ -101,6 +95,18 @@ namespace GUI_Final_Project
             object res2 = webBrowser1.Document.InvokeScript("markTo", arr);                                             //
         }
 
+        public string FormCapture(Size _FormSize)
+        {
+            string strOutput = "C:\\Users\\seongbin\\OneDrive - 금오공과대학교\\그림\\스크린샷\\test.png";
+            Bitmap bmp = new Bitmap(_FormSize.Width, _FormSize.Height);
+            Graphics grp = Graphics.FromImage(bmp);
+            grp.CopyFromScreen(new Point(this.Bounds.X, this.Bounds.Y), new Point(0, 0), _FormSize);
+            bmp.Save(strOutput, System.Drawing.Imaging.ImageFormat.Png);
+
+            return strOutput;
+        }
+
+
         private void search_textbox_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -114,11 +120,6 @@ namespace GUI_Final_Project
         private void search_button_Click(object sender, EventArgs e)
         {
             input(search_textbox.Text);
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
         }
 
         private void listBox1_MouseClick(object sender, MouseEventArgs e)
@@ -142,17 +143,24 @@ namespace GUI_Final_Project
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            var sel = tuples[listBox1.SelectedIndex];
-            object[] arr = new object[] { sel.Item3, sel.Item2 };
-            webBrowser2.Document.InvokeScript("setRv", arr);
+            if (lv == 0)
+            {
+                webBrowser1.Document.InvokeScript("setLv");
+                lv = 1;
+            }
+            else
+            {
+                webBrowser1.Document.InvokeScript("rmLv");
+                lv = 0;
+            }
+                
         }
 
-        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        private void cap_btn_Click(object sender, EventArgs e)
         {
-
+            Size sz = new Size(this.Bounds.Width, this.Bounds.Height);
+            FormCapture(sz);
         }
-
-
     }
 }
 

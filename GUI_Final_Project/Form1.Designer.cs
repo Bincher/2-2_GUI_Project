@@ -36,7 +36,7 @@
             this.large_button = new System.Windows.Forms.Button();
             this.small_button = new System.Windows.Forms.Button();
             this.btn_Lv = new System.Windows.Forms.Button();
-            this.webBrowser2 = new System.Windows.Forms.WebBrowser();
+            this.cap_btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -70,30 +70,28 @@
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(14, 36);
+            this.listBox1.Location = new System.Drawing.Point(14, 40);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(222, 364);
+            this.listBox1.Size = new System.Drawing.Size(222, 472);
             this.listBox1.TabIndex = 4;
             this.listBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseClick);
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // webBrowser1
             // 
             this.webBrowser1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.webBrowser1.Location = new System.Drawing.Point(242, 36);
+            this.webBrowser1.Location = new System.Drawing.Point(242, 14);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(522, 430);
+            this.webBrowser1.Size = new System.Drawing.Size(1205, 653);
             this.webBrowser1.TabIndex = 5;
-            this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
             // 
             // large_button
             // 
-            this.large_button.Location = new System.Drawing.Point(14, 406);
+            this.large_button.Location = new System.Drawing.Point(14, 518);
             this.large_button.Name = "large_button";
-            this.large_button.Size = new System.Drawing.Size(72, 60);
+            this.large_button.Size = new System.Drawing.Size(103, 55);
             this.large_button.TabIndex = 6;
             this.large_button.Text = "+";
             this.large_button.UseVisualStyleBackColor = true;
@@ -101,9 +99,9 @@
             // 
             // small_button
             // 
-            this.small_button.Location = new System.Drawing.Point(92, 407);
+            this.small_button.Location = new System.Drawing.Point(133, 518);
             this.small_button.Name = "small_button";
-            this.small_button.Size = new System.Drawing.Size(64, 59);
+            this.small_button.Size = new System.Drawing.Size(103, 55);
             this.small_button.TabIndex = 7;
             this.small_button.Text = "-";
             this.small_button.UseVisualStyleBackColor = true;
@@ -111,28 +109,30 @@
             // 
             // btn_Lv
             // 
-            this.btn_Lv.Location = new System.Drawing.Point(162, 408);
+            this.btn_Lv.Location = new System.Drawing.Point(150, 579);
             this.btn_Lv.Name = "btn_Lv";
-            this.btn_Lv.Size = new System.Drawing.Size(74, 58);
+            this.btn_Lv.Size = new System.Drawing.Size(86, 88);
             this.btn_Lv.TabIndex = 8;
             this.btn_Lv.Text = "LoadView";
             this.btn_Lv.UseVisualStyleBackColor = true;
             this.btn_Lv.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // webBrowser2
+            // cap_btn
             // 
-            this.webBrowser2.Location = new System.Drawing.Point(770, 36);
-            this.webBrowser2.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser2.Name = "webBrowser2";
-            this.webBrowser2.Size = new System.Drawing.Size(585, 430);
-            this.webBrowser2.TabIndex = 9;
+            this.cap_btn.Location = new System.Drawing.Point(12, 579);
+            this.cap_btn.Name = "cap_btn";
+            this.cap_btn.Size = new System.Drawing.Size(130, 88);
+            this.cap_btn.TabIndex = 10;
+            this.cap_btn.Text = "스크린샷";
+            this.cap_btn.UseVisualStyleBackColor = true;
+            this.cap_btn.Click += new System.EventHandler(this.cap_btn_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1367, 478);
-            this.Controls.Add(this.webBrowser2);
+            this.ClientSize = new System.Drawing.Size(1459, 679);
+            this.Controls.Add(this.cap_btn);
             this.Controls.Add(this.btn_Lv);
             this.Controls.Add(this.small_button);
             this.Controls.Add(this.large_button);
@@ -159,7 +159,7 @@
         private System.Windows.Forms.Button small_button;
         private System.Windows.Forms.WebBrowser webBrowser1;
         private System.Windows.Forms.Button btn_Lv;
-        private System.Windows.Forms.WebBrowser webBrowser2;
+        private System.Windows.Forms.Button cap_btn;
     }
 }
 
