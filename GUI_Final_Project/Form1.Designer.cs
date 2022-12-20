@@ -72,7 +72,7 @@
             this.listBox1.ItemHeight = 12;
             this.listBox1.Location = new System.Drawing.Point(14, 40);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(222, 472);
+            this.listBox1.Size = new System.Drawing.Size(222, 508);
             this.listBox1.TabIndex = 4;
             this.listBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseClick);
             // 
@@ -89,7 +89,7 @@
             // 
             // large_button
             // 
-            this.large_button.Location = new System.Drawing.Point(14, 518);
+            this.large_button.Location = new System.Drawing.Point(16, 560);
             this.large_button.Name = "large_button";
             this.large_button.Size = new System.Drawing.Size(103, 55);
             this.large_button.TabIndex = 6;
@@ -99,7 +99,7 @@
             // 
             // small_button
             // 
-            this.small_button.Location = new System.Drawing.Point(133, 518);
+            this.small_button.Location = new System.Drawing.Point(133, 560);
             this.small_button.Name = "small_button";
             this.small_button.Size = new System.Drawing.Size(103, 55);
             this.small_button.TabIndex = 7;
@@ -109,9 +109,9 @@
             // 
             // btn_Lv
             // 
-            this.btn_Lv.Location = new System.Drawing.Point(150, 579);
+            this.btn_Lv.Location = new System.Drawing.Point(133, 621);
             this.btn_Lv.Name = "btn_Lv";
-            this.btn_Lv.Size = new System.Drawing.Size(86, 88);
+            this.btn_Lv.Size = new System.Drawing.Size(103, 46);
             this.btn_Lv.TabIndex = 8;
             this.btn_Lv.Text = "LoadView";
             this.btn_Lv.UseVisualStyleBackColor = true;
@@ -119,9 +119,9 @@
             // 
             // cap_btn
             // 
-            this.cap_btn.Location = new System.Drawing.Point(12, 579);
+            this.cap_btn.Location = new System.Drawing.Point(14, 621);
             this.cap_btn.Name = "cap_btn";
-            this.cap_btn.Size = new System.Drawing.Size(130, 88);
+            this.cap_btn.Size = new System.Drawing.Size(105, 46);
             this.cap_btn.TabIndex = 10;
             this.cap_btn.Text = "스크린샷";
             this.cap_btn.UseVisualStyleBackColor = true;

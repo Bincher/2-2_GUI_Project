@@ -39,7 +39,6 @@ namespace GUI_Final_Project
             string dir = System.IO.Directory.GetCurrentDirectory();
             string path = System.IO.Path.Combine(dir, html);
             webBrowser1.Navigate(path);
-
         }
 
         public void Search(string area) // 지역 검색
@@ -97,12 +96,20 @@ namespace GUI_Final_Project
 
         public string FormCapture(Size _FormSize)
         {
-            string strOutput = "C:\\Users\\seongbin\\OneDrive - 금오공과대학교\\그림\\스크린샷\\test.png";
+            string strOutput = "C:\\test.png";
+            if (File.Exists(strOutput))
+            {
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                FileInfo f = new FileInfo(strOutput);
+                f.Delete();
+            }
+            
             Bitmap bmp = new Bitmap(_FormSize.Width, _FormSize.Height);
             Graphics grp = Graphics.FromImage(bmp);
             grp.CopyFromScreen(new Point(this.Bounds.X, this.Bounds.Y), new Point(0, 0), _FormSize);
             bmp.Save(strOutput, System.Drawing.Imaging.ImageFormat.Png);
-
+            System.Windows.Forms.Clipboard.SetImage(System.Drawing.Image.FromFile(strOutput));
             return strOutput;
         }
 
@@ -161,6 +168,7 @@ namespace GUI_Final_Project
             Size sz = new Size(this.Bounds.Width, this.Bounds.Height);
             FormCapture(sz);
         }
+
     }
 }
 
